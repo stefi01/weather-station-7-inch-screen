@@ -1,0 +1,31 @@
+Sky Weather — publish a screen update
+
+Buyers do not use Arduino. They use SET, then ABOUT, on the 7 in screen.
+
+The chip flashes a .bin (Arduino export). It does not flash an Intel .hex.
+This text file is only for you. The desk never reads it.
+
+1. In the sketch, next to the version:
+     #define SKY_VER "1.0"
+     #define SKY_GH_USER "stefi01"
+     #define SKY_GH_REPO "weather-station-7-inch-screen"
+   Raise SKY_VER before you compile. ota/version.txt must be that same number.
+
+2. Tools stay as in firmware\7 inch version\settings to change.txt:
+     ESP32S3 Dev Module, OPI PSRAM, 16MB,
+     USB CDC On Boot Enabled.
+   Keep the partition scheme that has two app slots. INSTALL writes into the other slot.
+
+3. Sketch > Export compiled Binary.
+   Rename a copy to:
+     ota/sky_7in.bin
+
+4. Put that same version number in ota/version.txt (one line, example 1.0).
+
+5. On GitHub, in repo weather-station-7-inch-screen on branch main, upload:
+     ota/version.txt
+     ota/sky_7in.bin
+   The first USB flash of a build that can update must be from Arduino.
+   After that, buyers tap CHECK FOR UPDATES. If a newer one is waiting, they tap INSTALL.
+
+This desk has no card install.
